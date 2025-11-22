@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export default function DemoForm() {
   const baseUrl = import.meta.env.VITE_BACKEND_URL || ''
@@ -24,8 +25,11 @@ export default function DemoForm() {
   }
 
   return (
-    <section id="demo" className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="demo" className="py-24 relative">
+      <motion.div aria-hidden className="absolute inset-0" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        <div className="absolute inset-0 bg-[radial-gradient(600px_circle_at_10%_30%,rgba(217,70,239,0.08),transparent_45%),radial-gradient(600px_circle_at_90%_60%,rgba(59,130,246,0.08),transparent_45%)]" />
+      </motion.div>
+      <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white">Request a tailored demo</h2>
@@ -37,7 +41,8 @@ export default function DemoForm() {
             </ul>
           </div>
 
-          <form onSubmit={submit} className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 text-white">
+          <form onSubmit={submit} className="relative rounded-2xl border border-white/10 bg-slate-900/60 p-6 text-white overflow-hidden">
+            <motion.div className="pointer-events-none absolute -top-10 -left-10 h-40 w-40 rounded-full bg-white/5 blur-2xl" animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 6, repeat: Infinity }} />
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm text-white/70">Company</label>
